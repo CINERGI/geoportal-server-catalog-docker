@@ -28,6 +28,9 @@ ENV GITURL=https://github.com/cinergi/geoportal-server-harvester.git
 WORKDIR /tmp
 RUN git clone ${GITURL} harvester
 WORKDIR /tmp/harvester
+ENV HARVESTER_CONFIG_DIR=/tmp/harvester/geoportal-application/geoportal-harvester-war/src/main/resources/config/
+COPY config/authentication-simple_harvester.xml ${HARVESTER_CONFIG_DIR}authentication-simple.xml
+COPY config/app-security_harvester.xml ${HARVESTER_CONFIG_DIR}app-security.xml
 RUN mvn package -DskipTests
 
 WORKDIR $CATALINA_HOME/webapps/
@@ -42,7 +45,7 @@ RUN apt-get update \
     ca-certificates \
 #   git \
 #   maven \
-    ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION" \
+#    ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION" \
  && apt-get clean \
  && rm -r /var/lib/apt/lists/*
  COPY tomcat-users.xml $CATALINA_HOME/conf

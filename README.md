@@ -1,7 +1,10 @@
 # Dockerized ESRI Geoportal Catalog Server and Harvester 
 This project bundles all prerequisites needed to run the geoportal server and a harvester are captured in this docker composition. The docker-compose.yml creates two containers, one running Tomcat with the [geoportal-server-catalog](https://github.com/Esri/geoportal-server-catalog) and the [geoportal-harvester](https://github.com/Esri/geoportal-harvester). The second container provides the Elasticsearch server for storing and indexing the data stored in the catalog server.
-This is based on the docker at:
-https://github.com/ma-ku/docker-geoportal
+This was initially based on the docker at: https://github.com/ma-ku/docker-geoportal
+It has been enchanced by 
+  * creating the webapplications/war files in a maven container,
+  * copying the resulting artifacts into the tomcat comtainer
+  * copying of cofig files into builds
 
 ## Releases and Downloads
 - Version 2.6.0 of geoportal-server-catalog and geoportal-harvester.
@@ -31,6 +34,23 @@ $ docker-compose up
 
 * Docker
 
+# Configuration
+configurations are in config.
+ I cant see my changes:
+ * rebuild just the geoportal:
+ ```docker-compose up --build geoportal`-no-cache``
+ or maybe this keeps images up until they are repalced:
+ ```docker-compose up -d --force-recreate --no-deps --build geoportal```
+ 
+ congfig not working
+ in separate window
+ docker ps
+ docker exec src_geoportal_1 ls /usr/local/tomcat/webapps/harvester/WEB-INF/classes/config
+
+  docker exec src_geoportal_1 cat /usr/local/tomcat/webapps/harvester/WEB-INF/classes/config/app-security.xml
+  docker exec src_geoportal_1 cat /usr/local/tomcat/webapps/harvester/WEB-INF/classes/config/authentication-simple.xml
+ 
+ 
 ## Kubernetes 
 for production:
 https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
