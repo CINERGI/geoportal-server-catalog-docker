@@ -38,8 +38,7 @@ $ docker-compose up
 configurations are in config.
  I cant see my changes:
  * rebuild just the geoportal:
- ```docker-compose up --build geoportal`-no-cache``
- or maybe this keeps images up until they are repalced:
+  this keeps images up until they are replaced:
  ```docker-compose up -d --force-recreate --no-deps --build geoportal```
  
  congfig not working

@@ -15,22 +15,29 @@ MAINTAINER David Valentine dwvalentine@usdc.edu
 # && rm -r /var/lib/apt/lists/*
 
 # Install geoportal web application
-ENV GITURL=https://github.com/cinergi/geoportal-server-catalog.git
+ENV GPTGITURL=https://github.com/cinergi/geoportal-server-catalog.git
 
 WORKDIR /tmp
-RUN git clone ${GITURL} geoportal-server-catalog
+RUN git clone ${GPTGITURL} geoportal-server-catalog
+WORKDIR /tmp/geoportal-server-catalog/geoportal/src/main/resources/config
+#ENV HARVESTER_CONFIG_DIR=/tmp/harvester/geoportal-application/geoportal-harvester-war/src/main/resources/config/
+COPY config/geoportal/ .
+#COPY config/harvester/app-security_harvester.xml app-security.xml
+#RUN ls -al /tmp/geoportal-server-catalog/geoportal/src/main/resources/config/
 WORKDIR /tmp/geoportal-server-catalog/geoportal
 RUN mvn package -DskipTests
 
 # Install harvester application
-ENV GITURL=https://github.com/cinergi/geoportal-server-harvester.git
+ENV HRVGITURL=https://github.com/cinergi/geoportal-server-harvester.git
 
 WORKDIR /tmp
-RUN git clone ${GITURL} harvester
-WORKDIR /tmp/harvester
-ENV HARVESTER_CONFIG_DIR=/tmp/harvester/geoportal-application/geoportal-harvester-war/src/main/resources/config/
-COPY config/authentication-simple_harvester.xml ${HARVESTER_CONFIG_DIR}authentication-simple.xml
-COPY config/app-security_harvester.xml ${HARVESTER_CONFIG_DIR}app-security.xml
+RUN git clone ${HRVGITURL} harvester
+WORKDIR /tmp/harvester/geoportal-application/geoportal-harvester-war/src/main/resources/config
+#ENV HARVESTER_CONFIG_DIR=/tmp/harvester/geoportal-application/geoportal-harvester-war/src/main/resources/config/
+COPY config/harvester/ .
+#COPY config/harvester/app-security_harvester.xml app-security.xml
+#RUN ls -al /tmp/harvester/geoportal-application/geoportal-harvester-war/src/main/resources/config/
+WORKDIR /tmp/harvester/
 RUN mvn package -DskipTests
 
 WORKDIR $CATALINA_HOME/webapps/
@@ -52,10 +59,8 @@ RUN apt-get update \
 
 WORKDIR $CATALINA_HOME/webapps/
 
-COPY --from=gptbuild /tmp/geoportal-server-catalog/geoportal/target/*.war $CATALINA_HOME/webapps/geportal.war
+COPY --from=gptbuild /tmp/geoportal-server-catalog/geoportal/target/*.war $CATALINA_HOME/webapps/geoportal.war
 COPY --from=gptbuild /tmp/harvester/geoportal-application/geoportal-harvester-war/target/*.war $CATALINA_HOME/webapps/harvester.war
 
 WORKDIR $CATALINA_HOME/webapps/
-# RUN cp /tmp/geoportal-server-catalog/geoportal/target/*.war geportal.war
 
-# RUN cp /tmp/harvester/geoportal-application/geoportal-harvester-war/target/*.war harvester.war

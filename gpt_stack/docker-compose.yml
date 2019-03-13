@@ -85,10 +85,14 @@ services:
 #          cpus: '0.25'
 #          memory: 256M
 
-networks:
-  default:
-    external:
-      name: geoportal
+# ########pain point removed
+# requires creation of an  geoportal network.
+# docker network geoportal create
+###########
+#networks:
+#  default:
+#    external:
+#      name: geoportal
 
 volumes:
   esdata1:
