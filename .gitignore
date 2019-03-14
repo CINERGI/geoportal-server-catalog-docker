@@ -1,4 +1,4 @@
 .DS_Store
 /src/local/harvester/harvester.mv.db
 .idea
-/local/harvester/
+**/local/harvester/
