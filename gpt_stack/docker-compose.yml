@@ -13,8 +13,6 @@ services:
     volumes:
       - "./local/harvester:/root"
       - gptmetadata:/opt/tomcat/webapps/metadata
-    links: 
-      - elasticsearch:elasticsearch
     networks:
       - default
 #    deploy:
@@ -30,9 +28,9 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
     container_name: elasticsearch1
     hostname: elasticsearch
-    ports:
-      - "9200:9200"
-      - "9300:9300"
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
     ulimits:
       memlock:
         soft: -1

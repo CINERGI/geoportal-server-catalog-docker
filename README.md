@@ -50,6 +50,24 @@ configurations are in config.
   docker exec src_geoportal_1 cat /usr/local/tomcat/webapps/harvester/WEB-INF/classes/config/authentication-simple.xml
  
  
+## updating a config without a rebuild
+Get the container_ID for gpt_stack_geoportal 
+```docker container ls```
+```
+CONTAINER ID        IMAGE                                                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
+7e5b739a0f21        5a17f0be06fe                                          "/bin/sh -c 'mvn -P$…"   2 minutes ago       Up 2 minutes                                 quirky_franklin
+0ba1607c392c        gpt_stack_geoportal                                   "catalina.sh run"        2 days ago          Up 2 minutes        0.0.0.0:8082->8080/tcp   gpt_stack_geoportal_1
+4ed08c65d851        docker.elastic.co/elasticsearch/elasticsearch:6.6.1   "/usr/local/bin/dock…"   2 days ago          Up 2 minutes        9200/tcp, 9300/tcp       elasticsearch1
+```
+use container id (0ba1607c392c) in docker cp 
+```
+docker cp ./geoportal/config/geoportal/authentication-simple.xml 0ba1607c392c:/usr/local/tomcat/webapps/geoportal/WEB-INF/classes/config/
+```
+Touch the web.xml to trigger a reload
+```
+docker-compose exec geoportal touch /usr/local/tomcat/webapps/geoportal/WEB-INF/classes/config/
+```
+
 ## Kubernetes 
 for production:
 https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html

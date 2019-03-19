@@ -55,7 +55,8 @@ RUN apt-get update \
 #    ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION" \
  && apt-get clean \
  && rm -r /var/lib/apt/lists/*
- COPY tomcat-users.xml $CATALINA_HOME/conf
+# do this with a secret
+COPY config/tomcat-users.xml $CATALINA_HOME/conf
 
 WORKDIR $CATALINA_HOME/webapps/
 
