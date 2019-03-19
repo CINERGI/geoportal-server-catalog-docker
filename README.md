@@ -14,8 +14,8 @@ It has been enchanced by
 Clone the repository to your local drive. In order to build the containers and run them, use the following commands:
 ```bash
 $ git clone https://github.com/cinergi/geoportal-server-catalog-docker.git
-$ cd geoportal-server-catalog-docker/src
-$ docker network create geoportal
+$ cd geoportal-server-catalog-docker/gpt_stack
+$ docker network create datastudio
 $ docker-compose build
 $ docker-compose up
 ```

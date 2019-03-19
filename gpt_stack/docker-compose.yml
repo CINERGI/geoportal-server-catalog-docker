@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 
 services:
   geoportal:
@@ -14,7 +14,7 @@ services:
       - "./local/harvester:/root"
       - gptmetadata:/opt/tomcat/webapps/metadata
     networks:
-      - default
+      - datastudio
 #    deploy:
 #      resources:
 #        limits:
@@ -46,7 +46,7 @@ services:
       - xpack.security.enabled=false
       - xpack.ml.enabled=false
     networks:
-      - default
+      - datastudio
 #    deploy:
 #      resources:
 #        limits:
@@ -87,10 +87,10 @@ services:
 # requires creation of an  geoportal network.
 # docker network geoportal create
 ###########
-#networks:
-#  default:
-#    external:
-#      name: geoportal
+networks:
+  datastudio:
+    external:
+      name: datastudio
 
 volumes:
   esdata1:

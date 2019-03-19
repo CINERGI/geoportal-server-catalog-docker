@@ -10,7 +10,7 @@
     <security:authentication-provider>
       <security:user-service>
         <security:user name="gptadmin" password="gptadmin" authorities="ROLE_ADMIN,ROLE_PUBLISHER" />
-        <security:user name="admin" password="admin" authorities="ROLE_ADMIN,ROLE_PUBLISHER" />
+        <security:user name="admin" password="pass" authorities="ROLE_ADMIN,ROLE_PUBLISHER" />
         <security:user name="publisher" password="publisher" authorities="ROLE_PUBLISHER" />
         <security:user name="user" password="user" authorities="ROLE_USER" />
       </security:user-service>
