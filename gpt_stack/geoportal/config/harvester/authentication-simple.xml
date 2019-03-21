@@ -11,7 +11,7 @@
       <security:user-service>
           <!-- non-production {noop} means not encoded. Use insecure NoOpPasswordEncoder -->
         <security:user name="gptadmin" password="{noop}gptadmin" authorities="ROLE_ADMIN,ROLE_PUBLISHER" />
-        <security:user name="admin" password="{noop}admin" authorities="ROLE_ADMIN,ROLE_PUBLISHER" />
+        <security:user name="admin" password="{noop}pass" authorities="ROLE_ADMIN,ROLE_PUBLISHER" />
         <security:user name="publisher" password="{noop}publisher" authorities="ROLE_PUBLISHER" />
         <security:user name="user" password="{noop}user" authorities="ROLE_USER" />
       </security:user-service>
