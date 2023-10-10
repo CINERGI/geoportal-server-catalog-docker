@@ -7,13 +7,13 @@ It has been enchanced by
   * copying of cofig files into builds
 
 ## Releases and Downloads
-- Version 2.6.0 of geoportal-server-catalog and geoportal-harvester.
+- Version 2.7.0 of geoportal-server-catalog and geoportal-harvester.
 
 ## Installation
  
 Clone the repository to your local drive. In order to build the containers and run them, use the following commands:
 ```bash
-$ git clone https://github.com/cinergi/geoportal-server-catalog-docker.git
+$ git clone https://github.com/necrosky90/geoportal-server-catalog-2.7.0-docker.git
 $ cd geoportal-server-catalog-docker/gpt_stack
 $ docker network create datastudio
 $ docker-compose build
@@ -27,8 +27,8 @@ $ docker-compose up
 
 ## Run the applications
 
-* Connect to http://localhost:8080/geoportal to see the geoportal in action. 
-* Connect to http://localhost:8080/harvester to see the harvester in action. 
+* Connect to http://localhost:8082/geoportal to see the geoportal in action. 
+* Connect to http://localhost:8082/harvester to see the harvester in action. 
 
 ## Requirements
 

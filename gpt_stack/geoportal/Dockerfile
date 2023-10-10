@@ -1,6 +1,6 @@
 FROM maven:3-jdk-8 AS gptbuild
 
-MAINTAINER David Valentine dwvalentine@usdc.edu
+MAINTAINER Joachim Nennen j.nennen@rateestate.eu
 
 
 # Install wget and install/updates certificates
@@ -15,7 +15,7 @@ MAINTAINER David Valentine dwvalentine@usdc.edu
 # && rm -r /var/lib/apt/lists/*
 
 # Install geoportal web application
-ENV GPTGITURL=https://github.com/cinergi/geoportal-server-catalog.git
+ENV GPTGITURL=https://github.com/esri/geoportal-server-catalog.git
 
 WORKDIR /tmp
 RUN git clone ${GPTGITURL} geoportal-server-catalog
@@ -28,7 +28,7 @@ WORKDIR /tmp/geoportal-server-catalog/geoportal
 RUN mvn package -DskipTests
 
 # Install harvester application
-ENV HRVGITURL=https://github.com/cinergi/geoportal-server-harvester.git
+ENV HRVGITURL=https://github.com/esri/geoportal-server-harvester.git
 
 WORKDIR /tmp
 RUN git clone ${HRVGITURL} harvester
